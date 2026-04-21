@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prashant AI Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-logo">P</div>
+      <div>
+        <div class="logo">Prashant AI Assistant</div>
+        <div class="tagline">Salesforce • Data • AI Automation</div>
+      </div>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <nav id="navMenu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <p class="hero-label">Portfolio Demo</p>
+      <h1>AI Chatbot Embedded into a Business Website</h1>
+      <p>
+        This is a simple single-page website showing how an AI assistant can be connected
+        to an n8n workflow and launched only when the user wants to chat.
+      </p>
+      <a href="#about" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About This Project</h2>
+    <p>
+      This website demonstrates a practical AI automation solution. The chatbot is connected
+      to an n8n workflow and appears as a popup widget only when the user clicks the chat button.
+    </p>
+  </section>
+
+  <section id="services" class="about">
+    <h2>What This Demo Shows</h2>
+    <p>
+      HTML, CSS, JavaScript frontend, chatbot UX, webhook integration, and AI automation
+      using n8n and OpenAI.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Prashant AI Assistant | Built with HTML, CSS, JavaScript, n8n, and OpenAI</p>
+  </footer>
+
+  <!-- Floating Chat Button -->
+<button id="chatLauncher" class="chat-launcher">💬 Chat with Prashant</button>
+
+<!-- Chat Popup -->
+<div id="chatPopup" class="chat-popup hidden">
+  <div class="chat-popup-header">
+    <div>
+      <h3>Prashant AI Assistant</h3>
+      <p>Ask me anything</p>
+    </div>
+    <button id="closeChat" class="close-chat">✕</button>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="chat-actions">
+    <label for="fileUpload" class="action-btn">📎 Upload File</label>
+    <button id="raiseTicketBtn" class="action-btn" type="button">🎫 Raise Ticket</button>
+    <button id="emailHrBtn" class="action-btn" type="button">✉️ Email HR</button>
+    <input
+      type="file"
+      id="fileUpload"
+      class="hidden-file"
+      accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+    />
+  </div>
+
+  <!-- Hidden panels -->
+  <div id="ticketPanel" class="action-panel hidden">
+    <h4>Raise HR Ticket</h4>
+    <input type="text" id="ticketName" placeholder="Your name" />
+    <input type="email" id="ticketEmail" placeholder="Your email" />
+    <input type="text" id="ticketSubject" placeholder="Issue subject" />
+    <textarea id="ticketDescription" rows="3" placeholder="Describe the issue"></textarea>
+    <button id="submitTicketBtn" class="panel-submit-btn">Submit Ticket</button>
+  </div>
+
+  <div id="emailPanel" class="action-panel hidden">
+    <h4>Email HR</h4>
+    <input type="text" id="emailName" placeholder="Your name" />
+    <input type="email" id="emailFrom" placeholder="Your email" />
+    <input type="text" id="emailSubject" placeholder="Email subject" />
+    <textarea id="emailBody" rows="3" placeholder="Write your message"></textarea>
+    <button id="sendEmailBtn" class="panel-submit-btn">Send to HR</button>
+  </div>
+
+  <div id="messages" class="messages">
+    <div class="bot-message">
+      <strong>Prashant AI Assistant:</strong><br />
+      Hello! How can I help you today?
+    </div>
+  </div>
+
+  <div class="input-area">
+    <textarea id="inp" placeholder="Type your message..." rows="2"></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+
+  <div class="chat-help">
+    Press <strong>Enter</strong> to send
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
