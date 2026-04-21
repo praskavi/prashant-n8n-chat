@@ -59,66 +59,149 @@
   </footer>
 
   <!-- Floating Chat Button -->
-<button id="chatLauncher" class="chat-launcher">💬 Chat with Prashant</button>
+  <button id="chatLauncher" class="chat-launcher">💬 Chat with HR</button>
 
-<!-- Chat Popup -->
-<div id="chatPopup" class="chat-popup hidden">
-  <div class="chat-popup-header">
-    <div>
-      <h3>Prashant AI Assistant</h3>
-      <p>Ask me anything</p>
+  <!-- Chat Popup -->
+  <div id="chatPopup" class="chat-popup hidden">
+
+    <!-- Header -->
+    <div class="chat-popup-header">
+      <div class="header-brand">
+        <div class="header-avatar">🏢</div>
+        <div>
+          <h3>HR AI Assistant</h3>
+          <p>Online · Typically replies instantly</p>
+        </div>
+      </div>
+      <button id="closeChat" class="close-chat">✕</button>
     </div>
-    <button id="closeChat" class="close-chat">✕</button>
-  </div>
 
-  <!-- Quick Actions -->
-  <div class="chat-actions">
-    <label for="fileUpload" class="action-btn">📎 Upload File</label>
-    <button id="raiseTicketBtn" class="action-btn" type="button">🎫 Raise Ticket</button>
-    <button id="emailHrBtn" class="action-btn" type="button">✉️ Email HR</button>
-    <input
-      type="file"
-      id="fileUpload"
-      class="hidden-file"
-      accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-    />
-  </div>
+    <!-- Body: Sidebar + Chat Main -->
+    <div class="chat-body">
 
-  <!-- Hidden panels -->
-  <div id="ticketPanel" class="action-panel hidden">
-    <h4>Raise HR Ticket</h4>
-    <input type="text" id="ticketName" placeholder="Your name" />
-    <input type="email" id="ticketEmail" placeholder="Your email" />
-    <input type="text" id="ticketSubject" placeholder="Issue subject" />
-    <textarea id="ticketDescription" rows="3" placeholder="Describe the issue"></textarea>
-    <button id="submitTicketBtn" class="panel-submit-btn">Submit Ticket</button>
-  </div>
+      <!-- Sidebar -->
+      <div class="chat-sidebar">
 
-  <div id="emailPanel" class="action-panel hidden">
-    <h4>Email HR</h4>
-    <input type="text" id="emailName" placeholder="Your name" />
-    <input type="email" id="emailFrom" placeholder="Your email" />
-    <input type="text" id="emailSubject" placeholder="Email subject" />
-    <textarea id="emailBody" rows="3" placeholder="Write your message"></textarea>
-    <button id="sendEmailBtn" class="panel-submit-btn">Send to HR</button>
-  </div>
+        <div class="sidebar-section-label">HR Topics</div>
 
-  <div id="messages" class="messages">
-    <div class="bot-message">
-      <strong>Prashant AI Assistant:</strong><br />
-      Hello! How can I help you today?
-    </div>
-  </div>
+        <button class="sidebar-topic active" data-topic="leave">
+          <span class="sidebar-icon">📋</span>
+          <span>Leave & Attendance</span>
+        </button>
+        <button class="sidebar-topic" data-topic="payroll">
+          <span class="sidebar-icon">💰</span>
+          <span>Payroll & Salary</span>
+        </button>
+        <button class="sidebar-topic" data-topic="benefits">
+          <span class="sidebar-icon">🏥</span>
+          <span>Benefits</span>
+        </button>
+        <button class="sidebar-topic" data-topic="policies">
+          <span class="sidebar-icon">📜</span>
+          <span>HR Policies</span>
+        </button>
+        <button class="sidebar-topic" data-topic="onboarding">
+          <span class="sidebar-icon">🚀</span>
+          <span>Onboarding</span>
+        </button>
+        <button class="sidebar-topic" data-topic="training">
+          <span class="sidebar-icon">🎓</span>
+          <span>Training</span>
+        </button>
+        <button class="sidebar-topic" data-topic="performance">
+          <span class="sidebar-icon">📊</span>
+          <span>Performance</span>
+        </button>
+        <button class="sidebar-topic" data-topic="relations">
+          <span class="sidebar-icon">🤝</span>
+          <span>Employee Relations</span>
+        </button>
 
-  <div class="input-area">
-    <textarea id="inp" placeholder="Type your message..." rows="2"></textarea>
-    <button id="sendBtn">Send</button>
-  </div>
+        <div class="sidebar-section-label">Actions</div>
 
-  <div class="chat-help">
-    Press <strong>Enter</strong> to send
-  </div>
-</div>
+        <label for="fileUpload" class="sidebar-topic sidebar-action">
+          <span class="sidebar-icon">📎</span>
+          <span>Upload File</span>
+        </label>
+        <button class="sidebar-topic sidebar-action" id="raiseTicketBtn" type="button">
+          <span class="sidebar-icon">🎫</span>
+          <span>Raise Ticket</span>
+        </button>
+        <button class="sidebar-topic sidebar-action" id="emailHrBtn" type="button">
+          <span class="sidebar-icon">✉️</span>
+          <span>Email HR</span>
+        </button>
+
+        <input
+          type="file"
+          id="fileUpload"
+          class="hidden-file"
+          accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+        />
+      </div>
+
+      <!-- Chat Main -->
+      <div class="chat-main">
+
+        <!-- Topic Header -->
+        <div class="topic-header" id="topicHeader">
+          <span id="topicIcon">📋</span>
+          <div>
+            <strong id="topicTitle">Leave &amp; Attendance</strong>
+            <span id="topicDesc">Leave balances, applications and attendance tracking</span>
+          </div>
+        </div>
+
+        <!-- Quick Chips -->
+        <div class="quick-chips" id="quickChips">
+          <button class="chip">How many days leave do I have?</button>
+          <button class="chip">Apply for annual leave</button>
+          <button class="chip">Sick leave policy</button>
+          <button class="chip">WFH approval process</button>
+        </div>
+
+        <!-- Hidden Panels -->
+        <div id="ticketPanel" class="action-panel hidden">
+          <h4>🎫 Raise HR Ticket</h4>
+          <input type="text" id="ticketName" placeholder="Your name" />
+          <input type="email" id="ticketEmail" placeholder="Your email" />
+          <input type="text" id="ticketSubject" placeholder="Issue subject" />
+          <textarea id="ticketDescription" rows="3" placeholder="Describe the issue"></textarea>
+          <button id="submitTicketBtn" class="panel-submit-btn">Submit Ticket</button>
+        </div>
+
+        <div id="emailPanel" class="action-panel hidden">
+          <h4>✉️ Email HR</h4>
+          <input type="text" id="emailName" placeholder="Your name" />
+          <input type="email" id="emailFrom" placeholder="Your email" />
+          <input type="text" id="emailSubject" placeholder="Email subject" />
+          <textarea id="emailBody" rows="3" placeholder="Write your message"></textarea>
+          <button id="sendEmailBtn" class="panel-submit-btn">Send to HR</button>
+        </div>
+
+        <!-- Messages -->
+        <div id="messages" class="messages">
+          <div class="bot-message">
+            <strong>HR Assistant:</strong><br />
+            Hello! I'm your HR Assistant. Select a topic from the sidebar or type your question below. How can I help you today?
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+          <textarea id="inp" placeholder="Ask about leave & attendance..." rows="2"></textarea>
+          <button id="sendBtn">Send</button>
+        </div>
+
+        <div class="chat-help">
+          Press <strong>Enter</strong> to send · <strong>Shift+Enter</strong> for new line
+        </div>
+
+      </div><!-- end chat-main -->
+
+    </div><!-- end chat-body -->
+
+  </div><!-- end chat-popup -->
 
   <script src="script.js"></script>
 </body>
