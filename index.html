@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prashant AI Assistant</title>
@@ -123,3 +124,616 @@
   <script src="script.js"></script>
 </body>
 </html>
+=======
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prashant Chatbot — HR Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f5f3ef;
+  --bg2:#edeae4;
+  --white:#ffffff;
+  --ink:#1a1814;
+  --ink2:#4a4740;
+  --ink3:#8a8780;
+  --ink4:#b8b5ae;
+  --accent:#c8622a;
+  --accent-light:#f5ede6;
+  --accent-mid:#e8895a;
+  --blue:#2563eb;
+  --blue-light:#eff4ff;
+  --green:#16a34a;
+  --green-light:#f0fdf4;
+  --border:#e2dfd8;
+  --border2:#d0cdc6;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 2px 8px rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.10);
+  --r:14px;
+  --r-sm:8px;
+  --r-pill:999px;
+  --sans:'Instrument Sans',sans-serif;
+  --serif:'Instrument Serif',serif;
+}
+
+html,body{height:100%;background:var(--bg);font-family:var(--sans);font-size:15px;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ═══ LAYOUT ═══ */
+.shell{
+  display:grid;
+  grid-template-columns:272px 1fr;
+  height:100vh;
+  max-width:1120px;
+  margin:0 auto;
+  background:var(--white);
+  box-shadow:var(--shadow-lg);
+}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  background:var(--bg);
+  border-right:1px solid var(--border);
+  overflow:hidden;
+}
+
+.sidebar-top{
+  padding:28px 22px 18px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.brand-icon{
+  width:36px;height:36px;
+  border-radius:10px;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.brand-icon svg{width:18px;height:18px}
+
+.brand-name{
+  font-family:var(--serif);
+  font-size:18px;
+  color:var(--ink);
+  letter-spacing:-0.3px;
+}
+
+.new-chat{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  padding:9px 14px;
+  background:var(--white);
+  border:1px solid var(--border2);
+  border-radius:var(--r-sm);
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:500;
+  color:var(--ink2);
+  cursor:pointer;
+  transition:all .15s;
+}
+.new-chat:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.new-chat svg{width:14px;height:14px;opacity:.6;transition:opacity .15s}
+.new-chat:hover svg{opacity:1}
+
+.sidebar-section{
+  padding:18px 22px 8px;
+}
+.sidebar-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink4);
+  margin-bottom:10px;
+}
+
+.topic-list{display:flex;flex-direction:column;gap:2px}
+
+.topic-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:var(--r-sm);
+  font-size:13px;
+  color:var(--ink2);
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-family:var(--sans);
+  text-align:left;
+  transition:background .12s,color .12s;
+  width:100%;
+}
+.topic-btn:hover{background:var(--bg2);color:var(--ink)}
+.t-icon{
+  width:26px;height:26px;
+  border-radius:6px;
+  background:var(--white);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;
+  flex-shrink:0;
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  padding:16px 22px;
+  border-top:1px solid var(--border);
+}
+.status-row{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--ink3);
+}
+.status-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);
+  animation:breathe 2.5s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.4}}
+.powered{margin-top:8px;font-size:11px;color:var(--ink4)}
+.powered span{color:var(--ink3)}
+
+/* ═══ MAIN ═══ */
+.main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 28px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+  background:var(--white);
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.agent-av{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:var(--accent-light);
+  border:1.5px solid var(--accent-mid);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:17px;
+  color:var(--accent);
+}
+.topbar-name{font-size:15px;font-weight:600;color:var(--ink);line-height:1.2}
+.topbar-sub{font-size:12px;color:var(--ink3);margin-top:1px}
+.model-badge{
+  font-size:11px;font-weight:500;
+  padding:4px 10px;
+  background:var(--blue-light);
+  color:var(--blue);
+  border-radius:var(--r-pill);
+  border:1px solid rgba(37,99,235,.15);
+}
+
+/* Messages */
+.messages-wrap{
+  flex:1;
+  overflow-y:auto;
+  padding:32px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:26px;
+  background:var(--white);
+  scroll-behavior:smooth;
+}
+.messages-wrap::-webkit-scrollbar{width:4px}
+.messages-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+/* Welcome */
+.welcome{
+  text-align:center;
+  padding:36px 20px 16px;
+  animation:fadeIn .5s ease both;
+}
+.welcome-icon{
+  width:56px;height:56px;
+  border-radius:16px;
+  background:var(--accent-light);
+  border:1.5px solid var(--accent-mid);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:28px;
+  color:var(--accent);
+}
+.welcome h2{
+  font-family:var(--serif);
+  font-size:28px;
+  letter-spacing:-.4px;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.welcome p{font-size:14px;color:var(--ink3);max-width:340px;margin:0 auto;line-height:1.65}
+
+.prompts-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  max-width:520px;
+  margin:24px auto 0;
+}
+.prompt-card{
+  padding:14px 16px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  cursor:pointer;
+  text-align:left;
+  font-family:var(--sans);
+  transition:all .15s;
+  animation:fadeUp .4s ease both;
+}
+.prompt-card:nth-child(1){animation-delay:.05s}
+.prompt-card:nth-child(2){animation-delay:.10s}
+.prompt-card:nth-child(3){animation-delay:.15s}
+.prompt-card:nth-child(4){animation-delay:.20s}
+.prompt-card:hover{background:var(--white);border-color:var(--accent-mid);box-shadow:0 2px 12px rgba(200,98,42,.10)}
+.prompt-card:hover .pc-arrow{opacity:1;transform:translateX(0)}
+.pc-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;display:flex;align-items:center;justify-content:space-between}
+.pc-arrow{opacity:0;transform:translateX(-4px);transition:all .15s;font-size:12px;color:var(--accent)}
+.pc-sub{font-size:12px;color:var(--ink3)}
+
+/* Message rows */
+.msg-group{
+  display:flex;
+  gap:12px;
+  animation:fadeUp .25s ease both;
+}
+.msg-group.user{flex-direction:row-reverse}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.msg-av{
+  width:32px;height:32px;flex-shrink:0;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  margin-top:2px;
+}
+.msg-group.bot .msg-av{background:var(--accent-light);border:1.5px solid var(--accent-mid);color:var(--accent);font-family:var(--serif);font-style:italic;font-size:15px}
+.msg-group.user .msg-av{background:var(--ink);color:#fff;font-size:11px}
+
+.msg-body{flex:1;min-width:0}
+.msg-name{font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:5px;letter-spacing:.02em}
+.msg-group.user .msg-name{text-align:right}
+
+.bubble{
+  display:inline-block;
+  padding:12px 16px;
+  font-size:14px;
+  line-height:1.65;
+  border-radius:var(--r);
+  max-width:100%;
+}
+.msg-group.bot .bubble{
+  background:var(--bg);
+  border:1px solid var(--border);
+  color:var(--ink);
+  border-top-left-radius:4px;
+}
+.msg-group.user .bubble{
+  background:var(--ink);
+  color:#fff;
+  border-top-right-radius:4px;
+  float:right;
+  clear:both;
+}
+.msg-group.user .msg-body{display:flex;flex-direction:column;align-items:flex-end}
+
+/* Typing */
+.typing-dots{display:flex;gap:5px;align-items:center;padding:4px 0}
+.typing-dots span{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--ink4);
+  animation:bob 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2){animation-delay:.16s}
+.typing-dots span:nth-child(3){animation-delay:.32s}
+@keyframes bob{0%,60%,100%{transform:translateY(0);background:var(--ink4)}30%{transform:translateY(-6px);background:var(--accent)}}
+
+/* Input */
+.input-zone{
+  padding:16px 28px 24px;
+  border-top:1px solid var(--border);
+  background:var(--white);
+  flex-shrink:0;
+}
+.input-box{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  background:var(--bg);
+  border:1.5px solid var(--border2);
+  border-radius:var(--r);
+  padding:10px 10px 10px 16px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.input-box:focus-within{
+  border-color:var(--ink);
+  box-shadow:0 0 0 3px rgba(26,24,20,.06);
+}
+textarea{
+  flex:1;
+  background:none;
+  border:none;
+  outline:none;
+  font-family:var(--sans);
+  font-size:14px;
+  color:var(--ink);
+  resize:none;
+  line-height:1.55;
+  max-height:130px;
+  overflow-y:auto;
+  padding:2px 0;
+}
+textarea::placeholder{color:var(--ink4)}
+
+.send{
+  width:38px;height:38px;
+  border-radius:10px;
+  background:var(--ink);
+  border:none;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .15s,transform .1s,opacity .15s;
+}
+.send:hover:not(:disabled){background:#333}
+.send:active:not(:disabled){transform:scale(.94)}
+.send:disabled{opacity:.3;cursor:not-allowed}
+.send svg{width:16px;height:16px}
+
+.input-hint{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:8px;
+  font-size:11px;
+  color:var(--ink4);
+  padding:0 2px;
+}
+kbd{
+  display:inline-block;
+  padding:1px 5px;
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:4px;
+  font-size:10px;
+  font-family:var(--sans);
+  color:var(--ink3);
+}
+
+@media(max-width:680px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .topbar{padding:12px 16px}
+  .messages-wrap{padding:20px 16px}
+  .input-zone{padding:12px 16px 20px}
+  .prompts-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="3.5" fill="white"/>
+            <path d="M5 19c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="brand-name">Prashant Chatbot</span>
+      </div>
+      <button class="new-chat" onclick="clearChat()">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        New conversation
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Browse topics</div>
+      <div class="topic-list">
+        <button class="topic-btn" onclick="askTopic('What is the leave policy?')"><span class="t-icon">🏖️</span>Leave &amp; Time Off</button>
+        <button class="topic-btn" onclick="askTopic('What are the work from home rules?')"><span class="t-icon">🏠</span>Remote Work</button>
+        <button class="topic-btn" onclick="askTopic('What is the code of conduct?')"><span class="t-icon">📋</span>Code of Conduct</button>
+        <button class="topic-btn" onclick="askTopic('What are the employee benefits?')"><span class="t-icon">💼</span>Benefits</button>
+        <button class="topic-btn" onclick="askTopic('What is the grievance policy?')"><span class="t-icon">🤝</span>Grievance Policy</button>
+        <button class="topic-btn" onclick="askTopic('What is the probation period policy?')"><span class="t-icon">📅</span>Probation Period</button>
+        <button class="topic-btn" onclick="askTopic('How does the performance review work?')"><span class="t-icon">⭐</span>Performance Review</button>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="status-row">
+        <div class="status-dot"></div>
+        Connected to HR system
+      </div>
+      <div class="powered">Powered by <span>GPT-4.1-mini · n8n · Google Sheets</span></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="agent-av">P</div>
+        <div>
+          <div class="topbar-name">HR Policy Assistant</div>
+          <div class="topbar-sub">Ask anything about company policies</div>
+        </div>
+      </div>
+      <div class="model-badge">GPT-4.1-mini</div>
+    </div>
+
+    <div class="messages-wrap" id="messages">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon">P</div>
+        <h2>How can I help you today?</h2>
+        <p>I have access to your full HR policy database. Ask me anything — I'll find the answer instantly.</p>
+        <div class="prompts-grid">
+          <button class="prompt-card" onclick="usePrompt('What is the leave policy?')">
+            <div class="pc-title">Leave policy <span class="pc-arrow">→</span></div>
+            <div class="pc-sub">Annual, sick &amp; medical leave</div>
+          </button>
+          <button class="prompt-card" onclick="usePrompt('What are the work from home rules?')">
+            <div class="pc-title">Work from home <span class="pc-arrow">→</span></div>
+            <div class="pc-sub">Remote work guidelines</div>
+          </button>
+          <button class="prompt-card" onclick="usePrompt('What are the employee benefits?')">
+            <div class="pc-title">Employee benefits <span class="pc-arrow">→</span></div>
+            <div class="pc-sub">Perks, health &amp; insurance</div>
+          </button>
+          <button class="prompt-card" onclick="usePrompt('What is the code of conduct?')">
+            <div class="pc-title">Code of conduct <span class="pc-arrow">→</span></div>
+            <div class="pc-sub">Workplace behaviour rules</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-zone">
+      <div class="input-box">
+        <textarea id="inp" rows="1" placeholder="Ask about any HR policy…" onkeydown="onKey(event)" oninput="resize(this)"></textarea>
+        <button class="send" id="sendBtn" onclick="send()" title="Send">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">
+        <span>Answers based strictly on your HR policy documents</span>
+        <span><kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> new line</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const HOOK = 'https://gerotoone.n8n-wsk.com/webhook/e9af0c64-4ff2-462b-965d-ab16f5fd83fd';
+const sid  = 'sid_' + Math.random().toString(36).slice(2,11);
+let busy = false;
+
+function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px'}
+function onKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
+function usePrompt(q){document.getElementById('inp').value=q;send()}
+function askTopic(q){document.getElementById('inp').value=q;send()}
+
+function hideWelcome(){const w=document.getElementById('welcome');if(w)w.remove()}
+function scrollEnd(){const m=document.getElementById('messages');m.scrollTop=m.scrollHeight}
+
+function addMsg(role,html){
+  hideWelcome();
+  const wrap=document.getElementById('messages');
+  const g=document.createElement('div'); g.className='msg-group '+role;
+  const av=document.createElement('div'); av.className='msg-av'; av.textContent=role==='bot'?'P':'You';
+  const body=document.createElement('div'); body.className='msg-body';
+  const nm=document.createElement('div'); nm.className='msg-name'; nm.textContent=role==='bot'?'Prashant Chatbot':'You';
+  const bub=document.createElement('div'); bub.className='bubble'; bub.innerHTML=html;
+  body.appendChild(nm); body.appendChild(bub);
+  g.appendChild(av); g.appendChild(body);
+  wrap.appendChild(g); scrollEnd();
+  return g;
+}
+
+function showTyping(){
+  const wrap=document.getElementById('messages');
+  const g=document.createElement('div'); g.className='msg-group bot'; g.id='typing-row';
+  const av=document.createElement('div'); av.className='msg-av'; av.textContent='P';
+  const body=document.createElement('div'); body.className='msg-body';
+  const nm=document.createElement('div'); nm.className='msg-name'; nm.textContent='Prashant Chatbot';
+  const bub=document.createElement('div'); bub.className='bubble';
+  bub.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
+  body.appendChild(nm); body.appendChild(bub);
+  g.appendChild(av); g.appendChild(body);
+  wrap.appendChild(g); scrollEnd();
+}
+
+function removeTyping(){const t=document.getElementById('typing-row');if(t)t.remove()}
+
+function fmt(t){
+  return t
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\n/g,'<br>');
+}
+
+async function send(){
+  if(busy)return;
+  const inp=document.getElementById('inp');
+  const text=inp.value.trim(); if(!text)return;
+  addMsg('user',fmt(text));
+  inp.value=''; inp.style.height='auto';
+  busy=true; document.getElementById('sendBtn').disabled=true;
+  showTyping();
+  try{
+    const res=await fetch(HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: text, sessionId: sid }) }); removeTyping();
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    let reply='';
+    if(typeof data==='string')reply=data;
+    else if(data.output)reply=data.output;
+    else if(data.text)reply=data.text;
+    else if(data.message)reply=data.message;
+    else if(Array.isArray(data)&&data[0])reply=data[0].output||data[0].text||JSON.stringify(data[0]);
+    else reply=JSON.stringify(data);
+    addMsg('bot',fmt(reply));
+  }catch(err){
+    removeTyping();
+    addMsg('bot','<span style="color:var(--accent)">⚠</span> Could not reach the HR system. Please try again in a moment.');
+    console.error(err);
+  }
+  busy=false; document.getElementById('sendBtn').disabled=false; inp.focus();
+}
+
+function clearChat(){
+  const m=document.getElementById('messages'); m.innerHTML='';
+  const w=document.createElement('div'); w.className='welcome'; w.id='welcome';
+  w.innerHTML=`<div class="welcome-icon">P</div>
+    <h2>How can I help you today?</h2>
+    <p>I have access to your full HR policy database. Ask me anything — I'll find the answer instantly.</p>
+    <div class="prompts-grid">
+      <button class="prompt-card" onclick="usePrompt('What is the leave policy?')"><div class="pc-title">Leave policy <span class="pc-arrow">→</span></div><div class="pc-sub">Annual, sick &amp; medical leave</div></button>
+      <button class="prompt-card" onclick="usePrompt('What are the work from home rules?')"><div class="pc-title">Work from home <span class="pc-arrow">→</span></div><div class="pc-sub">Remote work guidelines</div></button>
+      <button class="prompt-card" onclick="usePrompt('What are the employee benefits?')"><div class="pc-title">Employee benefits <span class="pc-arrow">→</span></div><div class="pc-sub">Perks, health &amp; insurance</div></button>
+      <button class="prompt-card" onclick="usePrompt('What is the code of conduct?')"><div class="pc-title">Code of conduct <span class="pc-arrow">→</span></div><div class="pc-sub">Workplace behaviour rules</div></button>
+    </div>`;
+  m.appendChild(w);
+  document.getElementById('inp').focus();
+}
+
+document.getElementById('inp').focus();
+</script>
+</body>
+</html>
+>>>>>>> 4863234f1969e90805115e8236ddfbe24f2d8db4
